@@ -167,11 +167,16 @@
      Header pill: section titles, footer hide, menu
      ============================================================ */
   var headerTitle = $('[data-header-title]');
+  var titleTl = null;
   function setTitle(t) {
     if (t === state.title) return;
     state.title = t;
-    gsap.timeline().to(headerTitle, { yPercent: -100, duration: .6, ease: 'power3.in', onComplete: function () { headerTitle.textContent = t; } })
-      .set(headerTitle, { yPercent: 100 }).to(headerTitle, { yPercent: 0, duration: .6, ease: 'power3.out' });
+    if (titleTl) titleTl.kill();
+    titleTl = gsap.timeline()
+      .to(headerTitle, { yPercent: -100, duration: .6, ease: 'power3.in' })
+      .add(function () { headerTitle.textContent = state.title; })
+      .set(headerTitle, { yPercent: 100 })
+      .to(headerTitle, { yPercent: 0, duration: .6, ease: 'power3.out' });
   }
   $$('[data-section]').forEach(function (sec) {
     ScrollTrigger.create({ trigger: sec, start: 'top 50%', end: 'bottom 50%',
@@ -262,21 +267,45 @@
     el.addEventListener('click', function (e) { e.preventDefault(); openScope(el.getAttribute('data-scope-open')); });
   });
 
-  /* quote panel: scope pills + mailto */
-  var scopeInput = $('[data-scope-input]');
-  $$('[data-scope-buttons] .panel-button').forEach(function (b) {
-    b.addEventListener('click', function () {
-      $$('[data-scope-buttons] .panel-button').forEach(function (x) { x.classList.remove('is-active'); });
-      b.classList.add('is-active'); scopeInput.value = b.getAttribute('data-scope');
+  /* enquiry forms (panel + contact section): scope pills, FormSubmit AJAX, mailto fallback */
+  $$('[data-enquiry]').forEach(function (form) {
+    var input = $('[data-scope-input]', form), pills = $$('.panel-button', form);
+    pills.forEach(function (b) {
+      b.addEventListener('click', function () {
+        pills.forEach(function (x) { x.classList.remove('is-active'); });
+        b.classList.add('is-active'); input.value = b.getAttribute('data-scope');
+      });
     });
-  });
-  var form = $('[data-enquiry]');
-  form.addEventListener('submit', function (e) {
-    e.preventDefault();
-    var d = new FormData(form), g = function (k) { return String(d.get(k) || ''); };
-    var subject = 'Enquiry — ' + (g('scope') || 'road works') + ' (' + (g('company') || g('name')) + ')';
-    var bodyTxt = ['Name: ' + g('name'), 'Company: ' + g('company'), 'Phone: ' + g('phone'), 'Email: ' + g('email'), 'Scope: ' + g('scope'), '', g('message')].join('\n');
-    window.location.href = 'mailto:' + form.getAttribute('data-mailto') + '?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(bodyTxt);
+    var status = $('[data-form-status]', form), submit = $('button[type="submit"]', form);
+    var to = form.getAttribute('data-mailto');
+    var mailto = function (d) {
+      var g = function (k) { return String(d[k] || ''); };
+      var subject = 'Website enquiry: ' + (g('scope') || 'road works') + ' (' + (g('company') || g('name')) + ')';
+      var bodyTxt = ['Name: ' + g('name'), 'Company: ' + g('company'), 'Phone: ' + g('phone'), 'Email: ' + g('email'), 'Scope: ' + g('scope'), '', g('message')].join('\n');
+      window.location.href = 'mailto:' + to + '?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(bodyTxt);
+    };
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      var fd = new FormData(form), d = {};
+      fd.forEach(function (v, k) { d[k] = String(v); });
+      if (d._honey) return; // bot
+      if (status) { status.textContent = 'Sending your enquiry…'; status.className = 'form-status'; }
+      if (submit) submit.setAttribute('disabled', 'disabled');
+      var payload = { name: d.name, company: d.company, phone: d.phone, email: d.email, scope: d.scope, message: d.message,
+        _subject: 'Website enquiry: ' + (d.scope || 'road works') + ' from ' + (d.company || d.name), _template: 'table', _captcha: 'false', _replyto: d.email };
+      fetch('https://formsubmit.co/ajax/' + to, { method: 'POST', headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' }, body: JSON.stringify(payload) })
+        .then(function (r) { return r.json().then(function (j) { return { ok: r.ok, j: j }; }); })
+        .then(function (res) {
+          if (!res.ok || !(res.j && (res.j.success === 'true' || res.j.success === true))) throw new Error((res.j && res.j.message) || 'send failed');
+          if (status) { status.textContent = 'Thank you. Your enquiry is on its way to AKSB Global; we will come back to you shortly.'; status.className = 'form-status is-ok'; }
+          form.reset(); pills.forEach(function (x, i) { x.classList.toggle('is-active', i === 0); }); if (pills[0]) input.value = pills[0].getAttribute('data-scope');
+        })
+        .catch(function () {
+          if (status) { status.textContent = 'The form service did not respond, so we are opening your mail app with the enquiry filled in.'; status.className = 'form-status is-err'; }
+          mailto(d);
+        })
+        .finally(function () { if (submit) submit.removeAttribute('disabled'); });
+    });
   });
 
   /* ============================================================

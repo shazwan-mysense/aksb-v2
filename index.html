@@ -102,13 +102,14 @@
           <p class="panel-kicker">Your vision. Our commitment.</p><h2 class="panel-heading">Start the conversation</h2>
           <p class="panel-side">Tell us about the road, bridge or surfacing scope you are pricing. We will come back with the most practical method for the site. A few details are enough; drawings and BQs can follow by email.</p>
         </div>
-        <form class="panel-form" data-enquiry data-mailto="aksbglobal@gmail.com">
+        <form class="panel-form" data-enquiry data-mailto="aksbglobal@gmail.com" novalidate>
+          <input type="text" name="_honey" class="honey" tabindex="-1" autocomplete="off" aria-hidden="true" />
           <div class="panel-row">
             <p class="panel-text">What is the work about?</p>
             <div class="panel-column">
               <div class="panel-group">
                 <p class="panel-title">Pick a scope</p>
-                <div class="panel-buttons" data-scope-buttons>
+                <div class="panel-buttons">
                   <button class="panel-button is-active" type="button" data-scope="Road Furniture">Road Furniture</button>
                   <button class="panel-button" type="button" data-scope="Road Surface Treatment &amp; Anti-skid">Surface Treatment &amp; Anti-skid</button>
                   <button class="panel-button" type="button" data-scope="Bridge Expansion Joint">Bridge Expansion Joint</button>
@@ -141,16 +142,11 @@
                   <label class="panel-field"><span class="panel-label">Email</span><input class="panel-input" type="email" name="email" required autocomplete="email" placeholder="you@company.com" /></label>
                 </div>
                 <div class="panel-actions">
-                  <button class="base-button is-orange" type="submit">
-                    <svg viewBox="0 0 14 11" fill="none" class="arrow-svg" aria-hidden="true"><path d="M0.6 0V6H13.1" stroke="currentColor" stroke-width="1.2"/><rect x="9.19" y="2.23" width="5.56" height="5.56" transform="rotate(45 9.19 2.23)" stroke="currentColor" stroke-width="1.2"/></svg>
-                    <span class="label"><span class="line" aria-hidden="true">Send enquiry</span><span class="line">Send enquiry</span></span>
-                  </button>
-                  <a class="base-button is-alpha" href="https://wa.me/601165505892" target="_blank" rel="noreferrer">
-                    <svg viewBox="0 0 14 11" fill="none" class="arrow-svg" aria-hidden="true"><path d="M0.6 0V6H13.1" stroke="currentColor" stroke-width="1.2"/><rect x="9.19" y="2.23" width="5.56" height="5.56" transform="rotate(45 9.19 2.23)" stroke="currentColor" stroke-width="1.2"/></svg>
-                    <span class="label"><span class="line" aria-hidden="true">Or WhatsApp us</span><span class="line">Or WhatsApp us</span></span>
-                  </a>
+                  <button class="base-button is-orange" type="submit"><svg viewBox="0 0 14 11" fill="none" class="arrow-svg" aria-hidden="true"><path d="M0.6 0V6H13.1" stroke="currentColor" stroke-width="1.2"/><rect x="9.19" y="2.23" width="5.56" height="5.56" transform="rotate(45 9.19 2.23)" stroke="currentColor" stroke-width="1.2"/></svg><span class="label"><span class="line" aria-hidden="true">Send enquiry</span><span class="line">Send enquiry</span></span></button>
+                  <a class="base-button is-alpha" href="https://wa.me/601165505892" target="_blank" rel="noreferrer"><svg viewBox="0 0 14 11" fill="none" class="arrow-svg" aria-hidden="true"><path d="M0.6 0V6H13.1" stroke="currentColor" stroke-width="1.2"/><rect x="9.19" y="2.23" width="5.56" height="5.56" transform="rotate(45 9.19 2.23)" stroke="currentColor" stroke-width="1.2"/></svg><span class="label"><span class="line" aria-hidden="true">Or WhatsApp us</span><span class="line">Or WhatsApp us</span></span></a>
                 </div>
-                <p class="panel-note">Opens your mail app addressed to aksbglobal@gmail.com. Nothing is stored on this site.</p>
+                <p class="form-status" data-form-status aria-live="polite"></p>
+                <p class="panel-note">Sent straight to aksbglobal@gmail.com. Nothing is stored on this site.</p>
               </div>
             </div>
           </div>
@@ -467,6 +463,63 @@
                 <path d="M239.6 -1.5L0.6 118V610.5" stroke="currentColor" stroke-width="1.2"/>
                 <path d="M427.6 224.5L283.1 296.5V611M427.6 535L281.1 611" stroke="currentColor" stroke-width="1.2"/>
               </svg>
+            </div>
+          </section>
+
+          <!-- ============ Contact form (inline) ============ -->
+          <section class="contact-form" id="enquiry" data-section="Contact">
+            <div class="form-wrap">
+              <h2 class="base-title" data-fade>Start the conversation</h2>
+              <p class="about-text" data-split style="margin-top:2.4rem">A few details are enough. Drawings and BQs can follow by email once we know what we are looking at.</p>
+              <form class="panel-form" data-enquiry data-mailto="aksbglobal@gmail.com" novalidate>
+          <input type="text" name="_honey" class="honey" tabindex="-1" autocomplete="off" aria-hidden="true" />
+          <div class="panel-row">
+            <p class="panel-text">What is the work about?</p>
+            <div class="panel-column">
+              <div class="panel-group">
+                <p class="panel-title">Pick a scope</p>
+                <div class="panel-buttons">
+                  <button class="panel-button is-active" type="button" data-scope="Road Furniture">Road Furniture</button>
+                  <button class="panel-button" type="button" data-scope="Road Surface Treatment &amp; Anti-skid">Surface Treatment &amp; Anti-skid</button>
+                  <button class="panel-button" type="button" data-scope="Bridge Expansion Joint">Bridge Expansion Joint</button>
+                  <button class="panel-button" type="button" data-scope="Road Crack Repair System">Road Crack Repair</button>
+                  <button class="panel-button" type="button" data-scope="Civil &amp; Structure">Civil &amp; Structure</button>
+                  <button class="panel-button" type="button" data-scope="Something else">Something else</button>
+                </div>
+                <input type="hidden" name="scope" value="Road Furniture" data-scope-input />
+              </div>
+            </div>
+          </div>
+          <div class="panel-row">
+            <p class="panel-text">Tell us about the site</p>
+            <div class="panel-column">
+              <div class="panel-group">
+                <p class="panel-title">Location, scope, quantities, timing</p>
+                <textarea class="panel-textarea" name="message" required placeholder="Location, scope, quantities if you have them, and when the work needs to happen."></textarea>
+              </div>
+            </div>
+          </div>
+          <div class="panel-row">
+            <p class="panel-text">Your details</p>
+            <div class="panel-column">
+              <div class="panel-group">
+                <p class="panel-title">So we can come back to you</p>
+                <div class="panel-fields">
+                  <label class="panel-field"><span class="panel-label">Your name</span><input class="panel-input" type="text" name="name" required autocomplete="name" placeholder="Ahmad bin Abdullah" /></label>
+                  <label class="panel-field"><span class="panel-label">Company</span><input class="panel-input" type="text" name="company" autocomplete="organization" placeholder="Company / agency" /></label>
+                  <label class="panel-field"><span class="panel-label">Phone</span><input class="panel-input" type="tel" name="phone" autocomplete="tel" placeholder="+60 12 345 6789" /></label>
+                  <label class="panel-field"><span class="panel-label">Email</span><input class="panel-input" type="email" name="email" required autocomplete="email" placeholder="you@company.com" /></label>
+                </div>
+                <div class="panel-actions">
+                  <button class="base-button is-orange" type="submit"><svg viewBox="0 0 14 11" fill="none" class="arrow-svg" aria-hidden="true"><path d="M0.6 0V6H13.1" stroke="currentColor" stroke-width="1.2"/><rect x="9.19" y="2.23" width="5.56" height="5.56" transform="rotate(45 9.19 2.23)" stroke="currentColor" stroke-width="1.2"/></svg><span class="label"><span class="line" aria-hidden="true">Send enquiry</span><span class="line">Send enquiry</span></span></button>
+                  <a class="base-button is-alpha" href="https://wa.me/601165505892" target="_blank" rel="noreferrer"><svg viewBox="0 0 14 11" fill="none" class="arrow-svg" aria-hidden="true"><path d="M0.6 0V6H13.1" stroke="currentColor" stroke-width="1.2"/><rect x="9.19" y="2.23" width="5.56" height="5.56" transform="rotate(45 9.19 2.23)" stroke="currentColor" stroke-width="1.2"/></svg><span class="label"><span class="line" aria-hidden="true">Or WhatsApp us</span><span class="line">Or WhatsApp us</span></span></a>
+                </div>
+                <p class="form-status" data-form-status aria-live="polite"></p>
+                <p class="panel-note">Sent straight to aksbglobal@gmail.com. Nothing is stored on this site.</p>
+              </div>
+            </div>
+          </div>
+        </form>
             </div>
           </section>
 
