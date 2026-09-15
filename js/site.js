@@ -356,8 +356,8 @@
   var duo = $('.assets-duo');
   if (duo) {
     gsap.timeline({ defaults: { ease: 'none' }, scrollTrigger: { trigger: duo, start: 'top bottom', end: 'bottom top', scrub: true } })
-      .fromTo($('[data-duo="1"]'), { yPercent: 50 }, { yPercent: 0 }, 0)
-      .fromTo($('[data-duo="2"]'), { yPercent: -50 }, { yPercent: 0 }, 0);
+      .fromTo($('[data-duo="1"]'), { yPercent: 30 }, { yPercent: 0 }, 0)
+      .fromTo($('[data-duo="2"]'), { yPercent: -22 }, { yPercent: 0 }, 0);
   }
 
   /* ============================================================

@@ -812,3 +812,16 @@ strong { font-weight: 700; }
   .services-hint { display: none; }
   .service-text { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
 }
+
+/* ---------- round 2b: banner legibility + duo no longer covering the project rows ---------- */
+.banner-showroom .background::after {
+  content: ""; position: absolute; inset: 0; z-index: 2; pointer-events: none;
+  background:
+    linear-gradient(90deg, rgba(7, 18, 38, .72) 0%, rgba(7, 18, 38, .25) 45%, rgba(7, 18, 38, .55) 100%),
+    linear-gradient(180deg, rgba(7, 18, 38, .15) 0%, rgba(7, 18, 38, 0) 40%, rgba(7, 18, 38, .65) 100%);
+}
+.banner-showroom .background:hover .tint { opacity: .42; }
+.banner-showroom .base-heading, .banner-showroom .text, .banner-showroom .title { text-shadow: 0 1px 14px rgba(7, 18, 38, .55); }
+.featured-projects { position: relative; z-index: 2; }
+.assets-duo { margin-top: 10rem; }
+.project .image { left: 49rem; }
