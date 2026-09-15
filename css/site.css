@@ -213,7 +213,7 @@ strong { font-weight: 700; }
 .menu-main:hover .menu-link { color: color-mix(in srgb, currentcolor 40%, transparent); }
 .menu-main:hover .menu-link:hover { color: var(--color-white); }
 .menu-sub { column-count: 2; color: color-mix(in srgb, currentcolor 60%, transparent); margin: 4rem 0; }
-@media (width <= 600px) { .menu-sub { column-gap: 0; margin: 3rem 0; } }
+@media (width <= 600px) { .menu-sub { column-count: 1; margin: 3rem 0; } .menu-sub .menu-mask:nth-child(3) { break-after: auto; } }
 .menu-sub .menu-mask { margin: .2rem 0; }
 .menu-sub .menu-mask:nth-child(3) { break-after: column; }
 .menu-sublink { font-size: 1.6rem; line-height: 1.3; position: relative; text-align: left; }
