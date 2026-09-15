@@ -658,3 +658,157 @@ strong { font-weight: 700; }
   .js [data-fade], .js .tile { opacity: 1; }
   .js [data-split] { visibility: visible; }
 }
+
+/* ============================================================
+   Round 2 (client comments): approved v1 copy, service slider,
+   Why AKSB, soft blue tint, bigger certs, client marquee
+   ============================================================ */
+
+/* ---------- tablet: keep the desktop layout but stop the rem from collapsing ---------- */
+@media (width > 600px) and (width <= 1024px) { :root { --size: 1000; } }
+
+/* ---------- soft navy tint on every photo, lifted on hover ---------- */
+.tint-wrap { position: relative; display: block; overflow: hidden; }
+.tint {
+  position: absolute; inset: 0; z-index: 1; pointer-events: none;
+  background: #1b3a6b; opacity: .42; transition: opacity .8s var(--ease-out-quart);
+}
+.tint-wrap:hover .tint, .tile:hover .tint, .service:hover .tint, .project:hover .tint, .assets-duo .block:hover .tint, .banner-showroom .background:hover .tint { opacity: 0; }
+.tile .tint-wrap { position: absolute; inset: 0; }
+.tile .tint-wrap img { width: 100%; height: 100%; }
+.project .image.tint-wrap { position: absolute; }
+.panel-photos.tint-wrap { overflow: visible; }
+.panel-photos.tint-wrap .tint { display: none; }
+
+/* ---------- about paragraph + cta text (approved copy) ---------- */
+.about-text { max-width: 74rem; font-size: 1.8rem; line-height: 1.4; margin: 0 0 4rem; color: color-mix(in srgb, var(--color-grey) 80%, transparent); }
+.cta-text { max-width: 52rem; font-size: 1.8rem; line-height: 1.4; margin: -2rem 0 4rem; color: color-mix(in srgb, var(--color-grey) 75%, transparent); }
+.group-title { grid-column: 1 / 25; margin-top: 8rem; font-family: var(--font-mono); text-transform: uppercase; letter-spacing: .08em; font-size: 1.2rem; font-weight: 500; color: var(--color-blue); }
+.partners .content .text { max-width: 52rem; font-size: 1.8rem; line-height: 1.4; margin-top: -2rem; color: color-mix(in srgb, var(--color-grey) 75%, transparent); }
+.partner-grid { margin-top: 2.4rem; }
+.client-title { margin-top: 1.2rem; }
+.mono-dim { font-family: var(--font-mono); text-transform: uppercase; letter-spacing: .08em; font-size: 1.2rem; font-weight: 500; color: color-mix(in srgb, var(--color-grey) 45%, transparent); }
+@media (width <= 600px) {
+  .about-text, .cta-text, .partners .content .text { font-size: 1.6rem; }
+  .cta-text { margin: -1rem 0 3rem; }
+  .group-title { margin-top: 5rem; }
+}
+
+/* ---------- core business: scroll-driven slider ---------- */
+.services { margin: 15rem 0 4rem; height: 300svh; }
+.services-sticky { position: sticky; top: 0; height: 100svh; display: flex; flex-direction: column; justify-content: center; overflow: hidden; }
+.services-head { border-top: 1px solid var(--line); padding-top: 2rem; display: grid; grid-template-columns: repeat(24, 1fr); grid-column-gap: 2rem; align-items: start; }
+.services-head .base-title { grid-column: 1 / 7; }
+.services-intro { grid-column: 7 / 19; }
+.services-intro .base-heading { font-size: 4.8rem; letter-spacing: -.03em; line-height: 1; margin: .4rem 0 2rem; }
+.services-intro .text { font-size: 1.6rem; line-height: 1.35; max-width: 52rem; color: color-mix(in srgb, var(--color-grey) 75%, transparent); }
+.services-progress { grid-column: 19 / 25; justify-self: end; display: flex; align-items: center; gap: 1.6rem; font-family: var(--font-mono); text-transform: uppercase; letter-spacing: .1em; font-size: 1.2rem; font-weight: 600; color: color-mix(in srgb, var(--color-grey) 60%, transparent); }
+.services-count span { color: var(--color-grey); }
+.services-bar { width: 12rem; height: 1px; background: var(--line); position: relative; display: block; overflow: hidden; }
+.services-bar span { position: absolute; left: 0; top: 0; height: 100%; width: 0; background: var(--color-blue); }
+.services-track { display: flex; gap: 2rem; padding: 5rem 4rem 0; will-change: transform; width: max-content; }
+.service { width: 42rem; flex: none; cursor: pointer; }
+.service-media { aspect-ratio: 4 / 5; max-height: 46svh; position: relative; overflow: hidden; }
+.service-media img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; will-change: transform; }
+.service-title { position: absolute; left: 2.4rem; bottom: 2.4rem; z-index: 2; color: var(--color-white); font-size: 3.6rem; letter-spacing: -.02em; line-height: 1; max-width: 26rem; text-shadow: 0 2px 20px rgba(0, 0, 0, .35); }
+.service-kicker { margin-top: 2rem; font-family: var(--font-mono); text-transform: uppercase; letter-spacing: .08em; font-size: 1.2rem; font-weight: 500; color: var(--color-blue); }
+.service-text { margin-top: 1rem; font-size: 1.5rem; line-height: 1.4; color: color-mix(in srgb, var(--color-grey) 75%, transparent); }
+.service-link { display: inline-block; margin-top: 1.4rem; position: relative; font-family: var(--font-mono); text-transform: uppercase; letter-spacing: .08em; font-size: 1.2rem; font-weight: 500; }
+.service-link::after { will-change: transform; transform-origin: 100%; content: ""; background: currentColor; width: 100%; height: 1px; transition: transform .5s cubic-bezier(1, 0, 0, 1); position: absolute; inset: auto auto -.3rem 0; transform: scaleX(0); }
+.service:hover .service-link::after { transform-origin: 0; transform: scaleX(1); }
+.services-hint { margin-top: 4rem; }
+@media (width <= 600px) {
+  .services { height: auto; margin: 8rem 0 3rem; }
+  .services-sticky { position: static; height: auto; display: block; overflow: visible; }
+  .services-head { display: block; padding-top: 1.5rem; }
+  .services-intro .base-heading { font-size: 3.2rem; letter-spacing: -.02em; margin: 2rem 0 1.5rem; }
+  .services-progress { display: none; }
+  .services-track { overflow-x: auto; scroll-snap-type: x mandatory; padding: 3rem 2rem 0; width: auto; gap: 1.5rem; scrollbar-width: none; -webkit-overflow-scrolling: touch; }
+  .services-track::-webkit-scrollbar { display: none; }
+  .service { width: 27rem; scroll-snap-align: start; }
+  .service-title { font-size: 2.4rem; }
+  .services-hint { margin-top: 2.5rem; }
+}
+
+/* ---------- why AKSB ---------- */
+.why { margin: 15rem 0; }
+.why .container { border-top: 1px solid var(--line); padding-top: 2rem; display: grid; grid-template-columns: repeat(24, 1fr); grid-column-gap: 2rem; align-items: flex-start; }
+.why .base-title { grid-column: 1 / 11; }
+.why .content { grid-column: 11 / 25; }
+.why .base-heading { letter-spacing: -.03em; margin: 1rem 0 4rem; font-size: 6.4rem; line-height: 1; }
+.why-grid { grid-column: 1 / 25; margin-top: 6rem; display: grid; grid-template-columns: repeat(3, 1fr); gap: 0 2rem; }
+.why-item { border-top: 1px solid var(--line); padding: 2.4rem 0 4rem; }
+.why-title { font-size: 2.4rem; line-height: 1.2; }
+.why-text { margin-top: 1.2rem; font-size: 1.6rem; line-height: 1.4; color: color-mix(in srgb, var(--color-grey) 70%, transparent); max-width: 34rem; }
+@media (width <= 600px) {
+  .why { margin: 8rem 0; }
+  .why .container { display: block; padding-top: 1.5rem; }
+  .why .base-heading { letter-spacing: -.02em; margin: 6rem 0 3rem; font-size: 3.2rem; }
+  .why-grid { grid-template-columns: 1fr; margin-top: 2rem; }
+  .why-item { padding: 2rem 0 2.6rem; }
+  .why-title { font-size: 2rem; }
+}
+
+/* ---------- projects: approved descriptions inside the rows ---------- */
+.project-head { width: 46rem; flex: none; }
+.project .project-head .title { width: auto; }
+.project-desc { margin-top: .6rem; font-size: 1.4rem; line-height: 1.4; opacity: .4; transition: opacity .4s; max-width: 42rem; color: color-mix(in srgb, var(--color-grey) 80%, transparent); }
+.project:hover .project-desc { opacity: 1; }
+.project .products { margin-left: 2rem; }
+.project .image { left: 33rem; }
+@media (width <= 600px) { .project-head { width: auto; flex: 1 1 auto; min-width: 0; } .project-desc { max-width: none; opacity: .7; } }
+
+/* ---------- certifications: big cert on the left ---------- */
+.cert-intro { margin-top: 6rem; display: grid; grid-template-columns: repeat(24, 1fr); grid-column-gap: 2rem; }
+.cert-intro .base-heading { grid-column: 1 / 12; font-size: 4.8rem; letter-spacing: -.03em; line-height: 1; }
+.cert-intro .text { grid-column: 13 / 22; font-size: 1.8rem; line-height: 1.4; color: color-mix(in srgb, var(--color-grey) 75%, transparent); align-self: end; }
+.reviews .blocks { margin-top: 7rem; min-height: 66rem; }
+.reviews .block { align-items: start; }
+.reviews .cert-link { position: relative; grid-column: 1 / 10; width: auto; top: auto; left: auto; box-shadow: 0 2rem 6rem rgba(7, 18, 38, .16); }
+.cert-body { grid-column: 11 / 25; position: relative; padding-top: 1rem; }
+.cert-body .quote-svg { position: static; margin-bottom: 3rem; }
+.cert-body .blockquote { margin: 0; font-size: 5.6rem; }
+.cert-body .author { margin-top: 5rem; }
+.cert-body .function { max-width: 52rem; line-height: 1.5; }
+@media (width <= 600px) {
+  .cert-intro { display: block; margin-top: 3rem; }
+  .cert-intro .base-heading { font-size: 3.2rem; letter-spacing: -.02em; }
+  .cert-intro .text { margin-top: 1.5rem; font-size: 1.6rem; }
+  .reviews .blocks { min-height: 78rem; margin-top: 4rem; }
+  .reviews .cert-link { width: 24rem; margin: 0 auto 3rem; }
+  .cert-body .quote-svg { margin: 0 0 2rem; }
+  .cert-body .blockquote { font-size: 3rem; min-height: 0; }
+  .cert-body .author { margin-top: 2.5rem; }
+}
+
+/* ---------- clients: two-row marquee, no outlines ---------- */
+.client-marquee { margin-top: 3rem; overflow: hidden; }
+.client-row { overflow: hidden; padding: 1.5rem 0; }
+.client-track { display: flex; width: max-content; animation: client-left 42s linear infinite; }
+.client-row.is-right .client-track { animation-name: client-right; }
+.client-set { display: flex; }
+.client-marquee .client { width: 22vw; height: 14rem; display: flex; align-items: center; justify-content: center; padding: 0 3rem; background: none; min-height: 0; border: 0; }
+.client-marquee .client img { max-height: 7.5rem; max-width: 16vw; width: auto; object-fit: contain; opacity: .9; }
+.client-marquee .client.is-tall img { max-height: 11rem; }
+.client-marquee:hover .client-track { animation-play-state: paused; }
+@keyframes client-left { to { transform: translateX(-50%); } }
+@keyframes client-right { from { transform: translateX(-50%); } to { transform: translateX(0); } }
+@media (width <= 600px) {
+  .client-marquee .client { width: 44vw; height: 10rem; padding: 0 2rem; }
+  .client-marquee .client img { max-height: 5.6rem; max-width: 34vw; }
+  .client-marquee .client.is-tall img { max-height: 8rem; }
+  .client-row { padding: .5rem 0; }
+}
+@media (prefers-reduced-motion: reduce) { .client-track { animation: none; } }
+
+/* ---------- footer tagline ---------- */
+.footer-tagline { font-size: 1.6rem; line-height: 1.3; margin: -1rem 0 2.4rem; color: color-mix(in srgb, currentcolor 70%, transparent); }
+
+/* short viewports: keep the whole service card inside the pinned screen */
+@media (width > 600px) and (height <= 820px) {
+  .service-media { max-height: 40svh; }
+  .services-intro .base-heading { font-size: 4rem; margin: .2rem 0 1.4rem; }
+  .services-track { padding-top: 3rem; }
+  .services-hint { display: none; }
+  .service-text { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+}

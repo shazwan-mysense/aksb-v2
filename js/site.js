@@ -308,12 +308,32 @@
     gsap.fromTo(block, { y: 0 }, { y: t, ease: 'none', scrollTrigger: { trigger: collection, start: 'top bottom', end: 'bottom top', scrub: true } });
   });
   $$('[data-img]').forEach(function (img) {
-    var host = img.closest('.block, .tile') || img;
+    var host = img.closest('.block, .tile, .service') || img;
     gsap.fromTo(img, { scale: 1.1 }, { scale: 1, duration: 1, ease: 'power3.out', scrollTrigger: { trigger: host, start: 'top bottom' } });
     if (isTouch) return;
     host.addEventListener('mouseenter', function () { gsap.to(img, { scale: 1.1, duration: 1, ease: 'power3.out' }); });
     host.addEventListener('mouseleave', function () { gsap.to(img, { scale: 1, duration: 2, ease: 'power3.out' }); });
   });
+
+  /* ============================================================
+     Core business: scroll-driven slider (v1's sticky row, template styling)
+     ============================================================ */
+  var services = $('[data-services]');
+  if (services && window.innerWidth > 600) {
+    var sTrack = $('[data-services-track]'), sBar = $('[data-services-bar]'), sCount = $('[data-services-count]');
+    var sN = $$('.service', sTrack).length;
+    var shift = function () { return Math.max(0, sTrack.scrollWidth - window.innerWidth + remPx(4)); };
+    gsap.to(sTrack, { x: function () { return -shift(); }, ease: 'none',
+      scrollTrigger: { trigger: services, start: 'top top', end: 'bottom bottom', scrub: true, invalidateOnRefresh: true,
+        onUpdate: function (st) {
+          sBar.style.width = (st.progress * 100) + '%';
+          var i = Math.min(sN - 1, Math.floor(st.progress * sN + .0001)), t = (i < 9 ? '0' : '') + (i + 1);
+          if (sCount.textContent !== t) sCount.textContent = t;
+        } } });
+    $$('.service', sTrack).forEach(function (card) {
+      card.addEventListener('keydown', function (e) { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); card.click(); } });
+    });
+  }
 
   /* ============================================================
      Head office banner (B4vk5dQk2): pinned 200svh scrub
